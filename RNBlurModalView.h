@@ -26,9 +26,8 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-extern NSString * const kRNBlurDidShowNotification;
-extern NSString * const kRNBlurDidHidewNotification;
-
+typedef void (^ActionBlock)();
+@protocol RNBlurModalViewDelegate;
 @interface RNBlurModalView : UIView
 
 @property (assign, readonly) BOOL isVisible;
@@ -37,22 +36,24 @@ extern NSString * const kRNBlurDidHidewNotification;
 @property (assign) CGFloat animationDelay;
 @property (assign) UIViewAnimationOptions animationOptions;
 @property (assign) BOOL dismissButtonRight;
+@property (assign,nonatomic) id<RNBlurModalViewDelegate>delegate;
 @property (nonatomic, copy) void (^defaultHideBlock)(void);
-
-- (id)initWithViewController:(UIViewController*)viewController view:(UIView*)view;
-- (id)initWithViewController:(UIViewController*)viewController title:(NSString*)title message:(NSString*)message;
-- (id)initWithParentView:(UIView*)parentView view:(UIView*)view;
-- (id)initWithParentView:(UIView*)parentView title:(NSString*)title message:(NSString*)message;
 - (id)initWithView:(UIView*)view;
-- (id)initWithTitle:(NSString*)title message:(NSString*)message;
-
-- (void)show;
-- (void)showWithDuration:(CGFloat)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options completion:(void (^)(void))completion;
-
-- (void)hide;
-- (void)hideWithDuration:(CGFloat)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options completion:(void (^)(void))completion;
-
+- (id)initWithTitle:(NSString*)title message:(id)message buttonTexts:(NSString *)firstObject, ...NS_REQUIRES_NIL_TERMINATION;
 -(void)hideCloseButton:(BOOL)hide;
 
+- (void)show;
+- (void)showAndHidedelay:(NSTimeInterval)delay;
+- (void)hide;
+- (void)hideNoAnimation;
 
+@end
+@protocol RNBlurModalViewDelegate <NSObject>
+- (void)RNView:(RNBlurModalView*)rnView buttonClickedInIdex:(NSInteger)index;
+@end
+@interface RNHubView : RNBlurModalView
+
+- (id)initWithCustomView:(UIView*)view;
+- (id)initWithString:(NSString*)str;
+- (void)show;
 @end
