@@ -644,7 +644,7 @@ static char UIButtonBlockKey;
     
     pixelBuffer = malloc(CGImageGetBytesPerRow(img) * CGImageGetHeight(img));
     
-    if(pixelBuffer == NULL)
+    //if(pixelBuffer == NULL)
         //DDLogVerbose(@"No pixelbuffer");
     
     outBuffer.data = pixelBuffer;
