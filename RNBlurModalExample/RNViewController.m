@@ -53,15 +53,15 @@
     RNBlurModalView *modal;
     if (useCustomView) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-        view.backgroundColor = [UIColor redColor];
-        view.layer.cornerRadius = 5.f;
-        view.layer.borderColor = [UIColor blackColor].CGColor;
-        view.layer.borderWidth = 5.f;
+//        view.backgroundColor = [UIColor redColor];
+//        view.layer.cornerRadius = 5.f;
+//        view.layer.borderColor = [UIColor blackColor].CGColor;
+//        view.layer.borderWidth = 5.f;
         
         modal = [[RNBlurModalView alloc] initWithView:view];
     }
     else {
-        modal = [[RNBlurModalView alloc] initWithTitle:@"Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!" message:@"This is the default modal for RNBlurModalView. Feel free to pass any UIView to it as you wish!"];
+        modal = [[RNBlurModalView alloc] initWithTitle:@"Hello world! Hello world! Hello world! Hello world! Hello world! Hello world! Hello world!" message:@"This is the default modal for RNBlurModalView. Feel free to pass any UIView to it as you wish!"buttonTexts:@"OK",nil];
         modal.defaultHideBlock = ^{
             NSLog(@"Code called after the modal view is hidden");
         };
